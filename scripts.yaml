@@ -1,3 +1,4 @@
+# Casting camera to tv via Home Assistant
 cameracast:
   alias: Stream Cameras to Chromecast
   sequence:
@@ -15,6 +16,8 @@ cameracast:
 
         '
       format: hls
+
+# This is a work in progress to get the SONOFF GK-200MP2-B to have ptz in Home Assistant 
 officeleft:
   alias: Move office camera to the left
   sequence:
