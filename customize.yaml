@@ -1,0 +1,28 @@
+sensor.couchpotato_online:
+  entity_picture: /local/couchpotato.png
+sensor.transmission_online:
+  entity_picture: /local/transmission.png
+sensor.sonarr_online:
+  entity_picture: /local/sonarr.png
+sensor.jackett_online:
+  entity_picture: /local/jackett.png
+sensor.plex_online:
+  entity_picture: /local/plex-color.png
+sensor.ombi_online:
+  entity_picture: /local/ombi.png
+sensor.zigbee_bridge_online:
+  entity_picture: /local/zigbee.png
+sensor.rf_bridge_online:
+  entity_picture: /local/rf.png
+sensor.router_online:
+  entity_picture: /local/zyxel.png
+sensor.docker_zigbee2mqtt_status:
+  entity_picture: /local/zigbee2mqtt.png
+sensor.cert_expiry_timestamp_valgeirhelgi_is:
+  entity_picture: /local/ssl-logo.png
+sensor.docker_tasmoadmin_status:
+  entity_picture: /local/tasmota.png
+sensor.philips_hue_online:
+  entity_picture: /local/hue.png
+binary_sensor.lumi_lumi_sensor_magnet_aq2_on_off:
+  icon: mdi:door
