@@ -16,10 +16,12 @@ I'm using a mish mash of Xiaomi sensors, Philips hue, Sonoff Tasmota, Sonoff Cam
 - [x] Insert code here
 - [ ] Document all
 - [ ] List Hardware
+- [ ] List up HACS integrations and frontends
+- [ ] Setup Wiki
 - [ ] And more
 
 ## Author
-This is orirginally setup and maintained by [Valgeir Helgi](https://valgeirhelgi.is)
+This is orirginally created and maintained by [Valgeir Helgi](https://valgeirhelgi.is)
 
 ## License
 MIT License
