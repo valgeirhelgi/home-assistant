@@ -1,9 +1,14 @@
 
 # About
-Here are my settings for Home Assistant. The settings are always changing, but I hope it can help somebody that is looking for ideas or getting started. Feel free to fork this and play with.
+Here are my settings for Home Assistant. The settings are always changing, but I hope it can help somebody that is looking for ideas or getting started. Feel free to fork this and play with. If you have any questions don't hesitate contacting me.
+
+# Screenshots
 
 # Hardware
 I'm using a mish mash of Xiaomi sensors, Philips hue, Sonoff Tasmota, Sonoff Camera and Onvif camera. Full list of hardware will be in the wiki.
+
+# Inspirations
+[Swakes](https://blog.swakes.co.uk/)
 
 # Author
 This is orirginally setup and maintained by [Valgeir Helgi](https://valgeirhelgi.is)
