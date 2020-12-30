@@ -1,0 +1,16 @@
+# Settings for cameras
+
+# Office Camera
+- platform: ffmpeg
+  input: rtsp://
+  name: Office Camera
+
+# Living Room Camera
+- platform: ffmpeg
+  input: rtsp://
+  name: Living Room Camera
+
+# Kitchen Camera
+- platform: ffmpeg
+  input: rtsp://
+  name: Kitchen Camera
