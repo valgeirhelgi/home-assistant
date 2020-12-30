@@ -6,7 +6,7 @@ Here are my settings for Home Assistant. The settings are always changing, but I
 I'm using a mish mash of Xiaomi sensors, Philips hue, Sonoff Tasmota, Sonoff Camera and Onvif camera. Full list of hardware will be in the wiki.
 
 # Author
-This is owned and maintained by [Valgeir Helgi](https://valgeirhelgi.is)
+This is orirginally setup and maintained by [Valgeir Helgi](https://valgeirhelgi.is)
 
 # License
 MIT License
