@@ -1,0 +1,181 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+frontend:
+  themes: !include_dir_merge_named themes
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+sensor: !include sensor.yaml
+camera: !include camera.yaml
+anniversaries: !include anniversaries.yaml
+
+homeassistant:
+  customize: !include customize.yaml
+
+mqtt:
+  broker: Insert IP-address of host
+
+webostv:
+  host: Insert IP of host
+  name: Living Room TV
+  turn_on_action:
+    service: wake_on_lan.send_magic_packet
+    data:
+      mac: Insert mac-address of host
+  customize:
+    sources:
+      - LiveTV
+      - YouTube
+      - Twitch
+      - Plex
+      - Chromecast
+
+media_player:
+
+nextcloud:
+  url: Insert url of host
+  username: !secret gmail
+  password: !secret nextcloud
+
+ombi:
+  host: Insert IP of host
+  port: Insert port of host
+  username: !secret gmail
+  api_key: !secret ombi
+
+stream:
+
+ffmpeg:
+
+octoprint:
+  host: Insert IP of host
+  api_key: !secret octoprint
+  bed: true
+  number_of_tools: 1
+
+spotify:
+  client_id: !secret spotify_id
+  client_secret: !secret spotify_secret
+
+spotcast:
+  sp_dc: !secret spotify_dc
+  sp_key: !secret spotify_key
+
+monitor_docker:
+  - name: Docker
+    containers:
+      - boockstack
+      - bookstack_db
+      - calibre-web
+      - code-server
+      - duplicati
+      - firefly_db_1
+      - firefly_fireflyiii_1
+      - freshrss
+      - grocy
+      - guacamole
+      - home-assistant
+      - homer
+      - mariadb
+      - motioneye
+      - nextcloud
+      - nextclouddb
+      - nginx_proxy_manager
+      - ombi
+      - photoprism_mariadb_1
+      - photoprism_photoprism_1
+      - planka_planka_1
+      - planka_postgres_1
+      - portainer
+      - tasmoadmin
+      - tautulli
+      - wallabag
+      - watchtower
+      - wireguard
+      - wordpress
+      - yacht
+      - zigbee2mqtt
+    rename:
+      boockstack: Bookstack
+      calibre-web: Calibre-Web
+      code-server: VS-Code
+      duplicati: Duplicati
+      firefly_fireflyiii_1: Firefly-III
+      freshrss: FreshRSS
+      grocy: Grocy
+      guacamole: Guacamole
+      home-assistant: Home Assistant
+      homer: Homer
+      motioneye: Motion-Eye
+      nextcloud: Nextcloud
+      nginx_proxy_manager: Nginx Proxy Manager
+      ombi: Ombi
+      photoprism_photoprism_1: PhotoPrism
+      planka_planka_1: Planka
+      portainer: Portainer
+      tasmoadmin: TasmoAdmin
+      tautulli: Tautulli
+      wallabag: Wallabag
+      watchtower: Watchtower
+      wireguard: Wireguard
+      wordpress: Wordpress
+      yacht: Yacht
+      zigbee2mqtt: Zigbee2mqtt
+    monitored_conditions:
+      - version
+      - containers_total
+      - containers_running
+      - containers_paused
+      - containers_stopped
+      - containers_cpu_percentage
+      - containers_memory
+      - containers_memory_percentage
+      - images
+      - status
+      - image
+      - cpu_percentage
+      - memory
+      - memory_percentage
+      - network_speed_up
+      - network_speed_down
+      - network_total_up
+      - network_total_down
+
+upnp:
+
+input_select:
+  chromecast_tv:
+    name: 'Select Chromecast:'
+    options:
+      - Television
+    icon: mdi:cast-connected 
+    
+  camera_select:
+    name: 'Select Camera:'
+    options:
+      - Livingroom
+      - Kitchen
+      - Office
+      - Garage
+    initial: Garage
+    icon: mdi:cctv 
+
+sonoff:
+  username: !secret hotmail
+  password: !secret classicpass
+
+google:
+  client_id: !secret googleid
+  client_secret: !secret googlesecret
+
+notify:
+
+wake_on_lan:
