@@ -1,19 +1,27 @@
-
-# About
+# My Home Assistant Config - Valli
+## About
 Here are my settings for Home Assistant. The settings are always changing, but I hope it can help somebody that is looking for ideas or getting started. Feel free to fork this and play with. If you have any questions don't hesitate contacting me.
 
-# Screenshots
+## Screenshots
+<img src="https://raw.githubusercontent.com/valgeirhelgi/home-assistant/main/home.png" alt="Home" width=428 height=262><img src="https://raw.githubusercontent.com/valgeirhelgi/home-assistant/main/media.png" alt="Media" width=428 height=262>
+<img src="https://raw.githubusercontent.com/valgeirhelgi/home-assistant/main/lights.png" alt="Lights" width=428 height=262><img src="https://raw.githubusercontent.com/valgeirhelgi/home-assistant/main/backend.png" alt="Backend" width=428 height=262>
 
-# Hardware
+## Hardware
 I'm using a mish mash of Xiaomi sensors, Philips hue, Sonoff Tasmota, Sonoff Camera and Onvif camera. Full list of hardware will be in the wiki.
 
-# Inspirations
+## Inspirations
 [Swakes](https://blog.swakes.co.uk/)
 
-# Author
+## ToDo
+- [x] Insert code here
+- [ ] Document all
+- [ ] List Hardware
+- [ ] And more
+
+## Author
 This is orirginally setup and maintained by [Valgeir Helgi](https://valgeirhelgi.is)
 
-# License
+## License
 MIT License
 
 Copyright (c) 2018-2020 Valgeir Helgi Bergþórsson
