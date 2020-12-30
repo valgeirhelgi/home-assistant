@@ -1,0 +1,1677 @@
+views:
+  - title: Home
+    path: home
+    icon: 'mdi:home'
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: 'custom:weather-card'
+            entity: weather.home
+            number_of_forecasts: '5'
+          - content: |
+              # Hvar er Valli?
+            style:
+              .: |
+                ha-card {
+                   background-color: transparent !important;
+                   box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 20px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+            type: markdown
+          - type: glance
+            entities:
+              - entity: person.user
+            state_color: true
+            show_name: false
+          - type: horizontal-stack
+            cards:
+              - entity: light.home
+                icon: 'mdi:lightbulb-group-outline'
+                name: Home
+                state:
+                  - icon: 'mdi:lightbulb-group-outline'
+                    name: Disabled
+                    styles:
+                      icon:
+                        - width: 55%
+                        - opacity: 0.2
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                    value: 'off'
+                  - color: black
+                    icon: 'mdi:lightbulb-group-outline'
+                    operator: default
+                    name: Enabled
+                    styles:
+                      icon:
+                        - width: 55%
+                        - opacity: 0.9
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - font-weight: bold
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                type: 'custom:button-card'
+              - entity: group.security_alerts_frontpage
+                icon: 'mdi:security'
+                name: Home
+                state:
+                  - icon: 'mdi:security'
+                    name: Disabled
+                    styles:
+                      icon:
+                        - width: 55%
+                        - opacity: 0.2
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                    value: 'off'
+                  - color: black
+                    icon: 'mdi:security'
+                    operator: default
+                    name: Enabled
+                    styles:
+                      icon:
+                        - width: 55%
+                        - opacity: 0.9
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - font-weight: bold
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                type: 'custom:button-card'
+              - entity: group.lights_automation
+                icon: 'mdi:home-lightbulb-outline'
+                name: Home
+                state:
+                  - icon: 'mdi:home-lightbulb-outline'
+                    name: Disabled
+                    styles:
+                      icon:
+                        - width: 55%
+                        - opacity: 0.2
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                    value: 'off'
+                  - color: black
+                    icon: 'mdi:home-lightbulb-outline'
+                    operator: default
+                    name: Enabled
+                    styles:
+                      icon:
+                        - width: 55%
+                        - opacity: 0.9
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - font-weight: bold
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                type: 'custom:button-card'
+          - type: markdown
+            content: >-
+              {% for package in
+              states.sensor.seventeentrack_packages_in_transit.attributes.packages
+              %}
+
+              **{{ package.friendly_name }}:** {{ package.info_text }}
+
+              {% endfor %}
+          - type: entities
+            entities:
+              - sensor.sorphirda
+          - type: 'custom:atomic-calendar-revive'
+            entities:
+              - entity: calendar.dagatal
+              - entity: calendar.manchester_united_matches
+            name: Calendar Card
+            enableModeChange: false
+            firstDayOfWeek: 1
+            maxDaysToShow: 7
+            showDate: true
+            showDeclined: false
+            sortByStartTime: true
+            hideFinishedEvents: true
+            showRelativeTime: false
+            untilText: until
+      - type: vertical-stack
+        cards:
+          - type: picture-glance
+            image: /local/gangur.jpg
+            entities:
+              - entity: light.gangur
+              - entity: lock.danalock
+              - entity: binary_sensor.frontdoor_status
+              - entity: binary_sensor.hallway_motion
+            title: Gangur
+            entity: light.gangur
+          - type: picture-glance
+            title: Skrifstofa
+            image: /local/skrifstofa.jpg
+            entities:
+              - entity: binary_sensor.office_motion
+              - entity: camera.office_camera
+              - entity: light.skrifstofa
+            entity: light.skrifstofa_2
+          - type: picture-glance
+            title: Eldhús
+            image: /local/eldhus.jpg
+            entities:
+              - entity: light.eldhus
+              - entity: camera.kitchen_camera
+              - entity: sensor.kitchen_humidity
+              - entity: sensor.kitchen_temperature
+              - entity: sensor.kitchen_pressure
+            entity: light.eldhus
+          - type: picture-glance
+            title: Þvottahús
+            image: /local/tvottahus.jpeg
+            entities:
+              - entity: switch.tasmota_3
+              - entity: switch.tasmota_2
+              - entity: sensor.lumi_lumi_weather_humidity
+              - entity: sensor.lumi_lumi_weather_temperature
+              - entity: sensor.lumi_lumi_weather_pressure
+              - entity: binary_sensor.lumi_lumi_sensor_magnet_aq2_on_off
+      - type: vertical-stack
+        cards:
+          - type: picture-glance
+            title: Stofa
+            image: /local/stofa.jpg
+            entities:
+              - entity: binary_sensor.living_room_motion
+              - entity: camera.living_room_camera
+              - entity: media_player.living_room_tv_2
+              - entity: light.stofa
+            entity: light.stofa
+          - type: picture-glance
+            title: Svefniherbergi
+            image: /local/svefniherbergi.jpg
+            entities:
+              - entity: binary_sensor.bedroom_motion
+              - entity: light.lampi_a
+                icon: 'mdi:desk-lamp'
+              - entity: light.lampi_b
+                icon: 'mdi:desk-lamp'
+              - entity: light.svefniherbergi
+            entity: light.svefnherbergi
+          - type: picture-glance
+            title: Baðherbergi
+            image: /local/badherbergi.jpg
+            entities:
+              - entity: sensor.bathroom_temperature
+              - entity: sensor.bathroom_humidity
+              - entity: binary_sensor.bathroom_motion
+              - entity: light.badherbergi
+            entity: light.badherbergi
+          - type: picture-glance
+            title: Garage
+            image: /local/bilskur.jpeg
+            entities:
+              - entity: camera.garage_camera
+              - entity: binary_sensor.garage_motion
+              - entity: sensor.garage_lights_ds18b20_temperature
+              - entity: sensor.3d_printer_si7021_temperature
+              - entity: sensor.3d_printer_si7021_humidity
+              - entity: switch.3d_printer
+                icon: 'mdi:printer-3d'
+              - entity: switch.tasmota
+                icon: 'mdi:lightbulb'
+              - entity: sensor.octoprint_current_state
+            entity: switch.tasmota
+  - title: media
+    path: media
+    icon: 'hass:play'
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - content: >
+              # <img width="30" height="30" src='/local/spotify.png'
+              style='vertical-align:middle' /> Spotify 
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+            type: markdown
+          - account: default
+            device: media_player.googlehome
+            display_style: grid
+            grid_center_covers: true
+            grid_covers_per_row: 5
+            hide_warning: true
+            limit: 15
+            playlist_type: default
+            spotify_entity: media_player.spotify_user
+            type: 'custom:spotify-card'
+            hide_top_header: true
+            hide_playback_controls: true
+            hide_currently_playing: true
+          - type: 'custom:mini-media-player'
+            entity: media_player.spotify_username
+      - type: vertical-stack
+        cards:
+          - content: >
+              # <img width="30" height="30" src='/local/tv.png'
+              style='vertical-align:middle' /> Spilarar
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+            type: markdown
+          - type: 'custom:mini-media-player'
+            entity: media_player.living_room_tv_2
+            name: Sjónvarp
+          - type: 'custom:mini-media-player'
+            entity: media_player.soundbar_1
+            name: Soundbar
+          - type: 'custom:mini-media-player'
+            entity: media_player.living_room_chromecast
+          - type: 'custom:mini-media-player'
+            entity: media_player.plex_plex_for_android_mobile_oneplus_7_pro
+          - type: 'custom:mini-media-player'
+            entity: media_player.plex_plex_for_android_mobile_galaxy_tab_a
+      - type: vertical-stack
+        cards:
+          - content: >
+              # <img width="30" height="30" src='/local/plex.png'
+              style='vertical-align:middle' /> Væntanlegir þættir
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+            type: markdown
+          - accent_color: '#fff'
+            line_color: '#000'
+            border_color: '#fff'
+            all_shadows: false
+            date: ddmm
+            entity: sensor.sonarr_upcoming_media
+            flag: false
+            image_style: fanart
+            line1_size: medium
+            line1_text: $episode
+            line2_text: $number
+            line3_text: 'Runtime: $runtime'
+            line4_text: $empty
+            max: 2
+            title: false
+            title_size: large
+            title_text: $title
+            type: 'custom:upcoming-media-card'
+          - content: >
+              # <img width="30" height="30" src='/local/plex.png'
+              style='vertical-align:middle' /> Nýtt á Plex
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+            type: markdown
+          - accent_color: '#fff'
+            line_color: '#000'
+            border_color: '#fff'
+            all_shadows: false
+            date: ddmm
+            entity: sensor.recently_added_tv
+            flag: false
+            image_style: fanart
+            line1_size: small
+            line1_text: $episode
+            line2_text: $number
+            line3_text: 'Runtime: $runtime'
+            max: 2
+            title: false
+            title_size: large
+            title_text: $title
+            type: 'custom:upcoming-media-card'
+          - accent_color: '#fff'
+            line_color: '#000'
+            border_color: '#fff'
+            all_shadows: false
+            date: ddmm
+            entity: sensor.recently_added_movies
+            flag: false
+            image_style: fanart
+            line1_text: $title
+            line2_text: $rating
+            line2_size: small
+            line3_text: $genres
+            line4_text: 'Runtime: $runtime'
+            max: 2
+            title: false
+            title_size: large
+            title_text: $title
+            type: 'custom:upcoming-media-card'
+      - type: vertical-stack
+        cards:
+          - type: markdown
+            content: >
+              # <img width="30" height="30" src='/local/server.png'
+              style='vertical-align:middle' /> Status
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+          - type: glance
+            entities:
+              - entity: sensor.plex_online
+                name: Plex
+              - entity: sensor.ombi_online
+                name: Ombi
+              - entity: sensor.transmission_online
+                name: Transmission
+              - entity: sensor.jackett_online
+                name: Jackett
+              - entity: sensor.couchpotato_online
+                name: Couchpotato
+              - entity: sensor.sonarr_online
+                name: Sonarr
+            columns: 3
+            state_color: true
+          - type: markdown
+            content: >
+              # <img width="30" height="30" src='/local/transmission.png'
+              style='vertical-align:middle' /> Transmission
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+          - type: glance
+            entities:
+              - entity: sensor.transmission_status
+                name: Status
+                icon: 'mdi:swap-vertical-bold'
+              - entity: sensor.transmission_down_speed
+                name: Download speed
+                icon: 'mdi:download'
+              - entity: sensor.transmission_up_speed
+                name: Upload speed
+                icon: 'mdi:upload'
+            state_color: true
+          - type: markdown
+            content: >
+              # <img width="30" height="30" src='/local/ombi.png'
+              style='vertical-align:middle' /> Ombi
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+          - type: glance
+            entities:
+              - entity: sensor.ombi_movie_requests
+                name: Movie requests
+              - entity: sensor.ombi_tv_show_requests
+                name: TV show requests
+            state_color: true
+      - type: vertical-stack
+        cards:
+          - type: markdown
+            content: >
+              # <img width="30" height="30" src='/local/prentari.png'
+              style='vertical-align:middle' /> 3d printer
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+          - type: entities
+            entities:
+              - entity: sensor.octoprint_current_state
+              - entity: sensor.octoprint_job_percentage
+              - entity: binary_sensor.octoprint_printing
+              - entity: binary_sensor.octoprint_printing_error
+              - entity: sensor.octoprint_time_elapsed
+              - entity: sensor.octoprint_time_remaining
+          - type: horizontal-stack
+            cards:
+              - type: 'custom:mini-graph-card'
+                align_icon: left
+                align_state: center
+                entities:
+                  - sensor.octoprint_actual_bed_temp
+                  - sensor.octoprint_target_bed_temp
+                font_size: 75
+                name: Bed
+                show:
+                  fill: false
+              - type: 'custom:mini-graph-card'
+                align_icon: left
+                align_state: center
+                entities:
+                  - sensor.octoprint_actual_tool0_temp
+                  - sensor.octoprint_target_tool0_temp
+                font_size: 75
+                name: Tool
+                show:
+                  fill: false
+  - icon: 'mdi:lightbulb-group'
+    title: lights
+    path: lights
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: markdown
+            content: |
+              # Heima 
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+          - type: light
+            entity: light.home
+            name: Öll ljós
+            icon: 'hass:home'
+          - type: markdown
+            content: |
+              # Bílskúr 
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+          - type: button
+            tap_action:
+              action: toggle
+            entity: switch.tasmota
+            icon: 'mdi:garage'
+            name: Ljós
+      - type: vertical-stack
+        cards:
+          - type: markdown
+            content: |
+              # Gangur 
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+          - type: light
+            entity: light.gangur
+            icon: 'mdi:door'
+            name: Öll ljós
+          - type: horizontal-stack
+            cards:
+              - type: button
+                entity: light.gangur_loftljos_1
+                name: Loftljós A
+                icon: 'mdi:wall-sconce-flat'
+                show_name: false
+              - type: button
+                entity: light.gangur_loftljos_2
+                name: Loftljós A
+                icon: 'mdi:wall-sconce-flat'
+                show_name: false
+          - type: horizontal-stack
+            cards:
+              - type: button
+                entity: light.gangur_veggljos_1
+                name: Veggljós A
+                icon: 'mdi:wall-sconce'
+                show_name: false
+              - type: button
+                entity: light.gangur_veggljos_2
+                name: Veggljós B
+                icon: 'mdi:wall-sconce'
+                show_name: false
+          - type: markdown
+            content: |
+              # Skrifstofa 
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+          - type: light
+            entity: light.skrifstofa
+            name: Loftljós
+            show_name: false
+            icon: 'mdi:desk'
+      - type: vertical-stack
+        cards:
+          - type: markdown
+            content: |
+              # Stofa 
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+          - type: horizontal-stack
+            cards:
+              - type: light
+                tap_action:
+                  action: toggle
+                entity: light.stofa
+                icon: 'mdi:sofa'
+                name: Öll ljós
+          - type: button
+            tap_action:
+              action: toggle
+            entity: light.stofa_loftljos
+            show_name: false
+            icon: 'mdi:ceiling-light'
+            icon_height: 100px
+          - type: horizontal-stack
+            cards:
+              - type: button
+                tap_action:
+                  action: toggle
+                entity: light.stofa_veggljos_1
+                name: Veggljós A
+                icon: 'mdi:wall-sconce'
+                show_name: false
+              - type: button
+                tap_action:
+                  action: toggle
+                entity: light.stofa_veggljos_2
+                name: Veggljós B
+                icon: 'mdi:wall-sconce'
+                show_name: false
+              - type: button
+                tap_action:
+                  action: toggle
+                entity: light.stofa_veggljos_3
+                name: Veggljós C
+                icon: 'mdi:wall-sconce'
+                show_name: false
+              - type: button
+                tap_action:
+                  action: toggle
+                entity: light.stofa_veggljos_4
+                name: Veggljós D
+                icon: 'mdi:wall-sconce'
+                show_name: false
+          - type: markdown
+            content: |
+              # Eldhús 
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+          - type: light
+            entity: light.eldhus
+            icon: 'hass:stove'
+            name: Loftjós
+      - type: vertical-stack
+        cards:
+          - type: markdown
+            content: |
+              # Svefniherbergi 
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+          - type: light
+            entity: light.svefnherbergi
+            icon: 'hass:bed'
+            name: Ljós
+          - type: horizontal-stack
+            cards:
+              - type: button
+                entity: light.lampi_a
+                name: Vinstri lampi
+                icon: 'mdi:desk-lamp'
+                show_name: false
+              - type: button
+                entity: light.lampi_b
+                icon: 'mdi:desk-lamp'
+                name: Hægri lampi
+                show_name: false
+          - type: markdown
+            content: |
+              # Baðherbergi 
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+          - type: light
+            entity: light.badhergi
+            icon: 'mdi:shower'
+      - type: vertical-stack
+        cards:
+          - content: >
+              # <img width="30" height="30" src='/local/motion-alert.png'
+              style='vertical-align:middle' /> Light Automations
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+            type: markdown
+          - type: horizontal-stack
+            cards:
+              - entity: automation.bedroom_lights
+                icon: 'mdi:bed'
+                name: Bedroom
+                state:
+                  - icon: 'mdi:bed'
+                    name: Disabled
+                    styles:
+                      icon:
+                        - width: 55%
+                        - opacity: 0.2
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                    value: 'off'
+                  - color: black
+                    icon: 'mdi:bed'
+                    operator: default
+                    name: Enabled
+                    styles:
+                      icon:
+                        - width: 55%
+                        - opacity: 0.9
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - font-weight: bold
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                type: 'custom:button-card'
+              - entity: automation.bathroom_lights
+                icon: 'mdi:toilet'
+                name: Toilet
+                state:
+                  - icon: 'mdi:toilet'
+                    name: Disabled
+                    styles:
+                      icon:
+                        - width: 55%
+                        - opacity: 0.2
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                    value: 'off'
+                  - color: black
+                    icon: 'mdi:toilet'
+                    operator: default
+                    name: Enabled
+                    styles:
+                      card: null
+                      icon:
+                        - width: 55%
+                        - opacity: 0.9
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - font-weight: bold
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                type: 'custom:button-card'
+              - entity: automation.hallway_lights
+                icon: 'mdi:door'
+                name: Door
+                state:
+                  - icon: 'mdi:door'
+                    name: Disabled
+                    styles:
+                      icon:
+                        - width: 55%
+                        - opacity: 0.2
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                    value: 'off'
+                  - color: black
+                    icon: 'mdi:door'
+                    operator: default
+                    name: Enabled
+                    styles:
+                      icon:
+                        - width: 55%
+                        - opacity: 0.9
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - font-weight: bold
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                type: 'custom:button-card'
+          - type: horizontal-stack
+            cards:
+              - entity: automation.office_lights
+                icon: 'mdi:desk'
+                name: Office
+                state:
+                  - icon: 'mdi:desk'
+                    name: Disabled
+                    styles:
+                      icon:
+                        - width: 55%
+                        - opacity: 0.2
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                    value: 'off'
+                  - color: black
+                    icon: 'mdi:desk'
+                    operator: default
+                    name: Enabled
+                    styles:
+                      icon:
+                        - width: 55%
+                        - opacity: 0.9
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - font-weight: bold
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                type: 'custom:button-card'
+              - entity: automation.living_room_and_kitchen_lights
+                icon: 'mdi:television'
+                name: Toilet
+                state:
+                  - icon: 'mdi:television'
+                    name: Disabled
+                    styles:
+                      icon:
+                        - width: 55%
+                        - opacity: 0.2
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                    value: 'off'
+                  - color: black
+                    icon: 'mdi:television'
+                    operator: default
+                    name: Enabled
+                    styles:
+                      card: null
+                      icon:
+                        - width: 55%
+                        - opacity: 0.9
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - font-weight: bold
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                type: 'custom:button-card'
+              - entity: automation.garage_lights
+                icon: 'mdi:'
+                name: Garage
+                state:
+                  - icon: 'mdi:garage'
+                    name: Disabled
+                    styles:
+                      icon:
+                        - width: 55%
+                        - opacity: 0.2
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                    value: 'off'
+                  - color: black
+                    icon: 'mdi:garage'
+                    operator: default
+                    name: Enabled
+                    styles:
+                      icon:
+                        - width: 55%
+                        - opacity: 0.9
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - font-weight: bold
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                type: 'custom:button-card'
+  - icon: 'mdi:server-network'
+    path: server
+    title: server
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - content: >
+              # <img width="30" height="30" src='/local/hassio.png'
+              style='vertical-align:middle' /> Home Assistant 
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+            type: markdown
+          - type: glance
+            entities:
+              - entity: sensor.hassio_uptime
+                name: Uptime
+              - entity: sensor.last_successful_authentication
+                name: Last login
+              - entity: sensor.latest_version
+          - type: horizontal-stack
+            cards:
+              - type: 'custom:mini-graph-card'
+                align_icon: left
+                align_state: center
+                entities:
+                  - sensor.processor_use_percent
+                font_size: 75
+                icon: 'mdi:chip'
+                name: CPU
+                show:
+                  fill: false
+              - align_icon: left
+                align_state: center
+                entities:
+                  - sensor.memory_use_percent
+                font_size: 75
+                name: Memory
+                show:
+                  fill: false
+                type: 'custom:mini-graph-card'
+              - align_icon: left
+                align_state: center
+                entities:
+                  - sensor.disk_use_percent_home
+                font_size: 75
+                name: Disk
+                show:
+                  fill: false
+                type: 'custom:mini-graph-card'
+          - type: glance
+            entities:
+              - entity: sensor.count_automations
+                name: Automations
+              - entity: sensor.count_binary_sensors
+                name: Binary sensors
+              - entity: sensor.count_device_trackers
+                name: Device trackers
+              - entity: sensor.count_sensors
+                name: Sensors
+              - entity: sensor.count_switches
+                name: Switches
+              - entity: sensor.count_zones
+                name: Zones
+            state_color: false
+            columns: 3
+            show_icon: false
+          - content: >
+              # <img width="30" height="30" src='/local/docker.png'
+              style='vertical-align:middle' /> Docker 
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+            type: markdown
+          - type: glance
+            entities:
+              - entity: sensor.docker_containers_running
+                name: Running
+              - entity: sensor.docker_containers_stopped
+                name: Stopped
+              - entity: sensor.docker_containers_paused
+                name: Paused
+              - entity: sensor.docker_containers_total
+                name: Total
+            state_color: true
+          - content: >
+              # <img width="30" height="30" src='/local/restart.png'
+              style='vertical-align:middle' /> Restart Services
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+            type: markdown
+          - entities:
+              - entity: zone.home
+                icon: 'mdi:home-assistant'
+                name: Hassio
+                tap_action:
+                  action: call-service
+                  service: homeassistant.restart
+              - entity: zone.home
+                icon: 'mdi:cogs'
+                name: Automation
+                tap_action:
+                  action: call-service
+                  service: automation.reload
+              - entity: zone.home
+                icon: 'mdi:script-text'
+                name: Script
+                tap_action:
+                  action: call-service
+                  service: script.reload
+              - entity: zone.home
+                icon: 'mdi:group'
+                name: Groups
+                tap_action:
+                  action: call-service
+                  service: group.reload
+            show_header_toggle: false
+            show_state: false
+            title: false
+            type: glance
+      - type: vertical-stack
+        cards:
+          - content: >
+              # <img width="30" height="30" src='/local/sensors.png'
+              style='vertical-align:middle' /> Sensor Network
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+            type: markdown
+          - type: glance
+            entities:
+              - entity: sensor.zigbee_bridge_online
+                name: Zigbee
+              - entity: sensor.rf_bridge_online
+                name: RF-433Mhz
+              - entity: sensor.philips_hue_online
+                name: Philips Hue
+              - entity: sensor.docker_zigbee2mqtt_status
+                name: Zigbee2mqtt
+              - entity: sensor.docker_tasmoadmin_status
+                name: Tasmota
+            state_color: true
+            columns: 3
+          - type: 'custom:search-card'
+          - cards:
+              - card:
+                  type: entities
+                filter:
+                  include:
+                    - entity_id: binary_sensor.*motion*
+                      options:
+                        secondary_info: last-changed
+                  exclude:
+                    - entity_id: binary_sensor.motion_swk_cr_uniuvc*
+                sort:
+                  count: 1
+                  method: last_changed
+                type: 'custom:auto-entities'
+              - card:
+                  show_icon: false
+                  type: entities
+                filter:
+                  include:
+                    - entity_id: binary_sensor.*_occupancy
+                      options:
+                        secondary_info: last-changed
+                    - entity_id: binary_sensor.*_status
+                      options:
+                        secondary_info: last-changed
+                sort:
+                  count: 1
+                  method: last_changed
+                type: 'custom:auto-entities'
+            title: false
+            type: 'custom:vertical-stack-in-card'
+          - type: 'custom:battery-state-card'
+            collapse: 3
+            entities:
+              - sensor.0x00158d00054d93be_battery
+              - sensor.0x00158d0002c3a3f5_battery
+              - sensor.balcony_battery
+              - sensor.bathroom_motion_battery
+              - sensor.bathroom_th_battery
+              - sensor.bedroom_motion_battery
+              - sensor.danalock_battery
+              - sensor.frontdoor_battery
+              - sensor.hallway_battery
+              - sensor.heima_battery_level
+              - sensor.kitchen_battery
+              - sensor.living_room_battery
+              - sensor.office_battery
+              - sensor.stofa_battery_level
+              - sensor.svefnherbergi_battery_level
+            sort_by_level: asc
+            title: false
+      - type: vertical-stack
+        cards:
+          - content: >
+              # <img width="30" height="30" src='/local/wifi.png'
+              style='vertical-align:middle' /> Network
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+            type: markdown
+          - type: glance
+            entities:
+              - entity: sensor.router_online
+                name: Router
+              - entity: sensor.cert_expiry_timestamp_valgeirhelgi_is
+                name: SSL expiry
+            state_color: false
+          - type: entities
+            entities:
+              - entity: sensor.local_ip
+                name: Local
+              - entity: sensor.myip
+                name: External
+                icon: 'mdi:ip'
+              - entity: sensor.speedtest_ping
+                name: Ping
+              - entity: sensor.speedtest_download
+                name: Download speed
+              - entity: sensor.speedtest_upload
+                name: Upload speed
+          - content: >
+              # <img width="30" height="30" src='/local/pi-hole.png'
+              style='vertical-align:middle' /> Pi-Hole
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+            type: markdown
+          - type: horizontal-stack
+            cards:
+              - entity: switch.pi_hole
+                icon: 'mdi:pi-hole'
+                name: Pi-Hole
+                state:
+                  - icon: 'mdi:pi-hole'
+                    name: Disabled
+                    styles:
+                      card:
+                        - height: 130px
+                        - width: 100px
+                      icon:
+                        - width: 55%
+                        - opacity: 0.2
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                    value: 'off'
+                  - color: black
+                    icon: 'mdi:pi-hole'
+                    operator: default
+                    name: Enabled
+                    styles:
+                      card:
+                        - height: 130px
+                        - width: 100px
+                      icon:
+                        - width: 55%
+                        - opacity: 0.9
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - font-weight: bold
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                type: 'custom:button-card'
+              - type: glance
+                entities:
+                  - entity: sensor.pi_hole_ads_blocked_today
+                    name: Total today
+                  - entity: sensor.pi_hole_ads_percentage_blocked_today
+                    name: Percentage
+                state_color: true
+          - content: >
+              # <img width="30" height="30" src='/local/humidity.png'
+              style='vertical-align:middle' /> Humidity
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+            type: markdown
+          - type: horizontal-stack
+            cards:
+              - type: 'custom:mini-graph-card'
+                align_icon: left
+                align_state: center
+                entities:
+                  - sensor.kitchen_humidity
+                font_size: 75
+                icon: 'mdi:water-percent'
+                name: Kitchen
+                show:
+                  fill: false
+              - type: 'custom:mini-graph-card'
+                align_icon: left
+                align_state: center
+                entities:
+                  - sensor.bathroom_humidity
+                font_size: 75
+                icon: 'mdi:water-percent'
+                name: Bathroom
+                show:
+                  fill: false
+          - type: horizontal-stack
+            cards:
+              - type: 'custom:mini-graph-card'
+                align_icon: left
+                align_state: center
+                entities:
+                  - sensor.lumi_lumi_weather_humidity
+                font_size: 75
+                icon: 'mdi:water-percent'
+                name: Laundry
+                show:
+                  fill: false
+              - type: 'custom:mini-graph-card'
+                align_icon: left
+                align_state: center
+                entities:
+                  - sensor.3d_printer_si7021_humidity
+                font_size: 75
+                icon: 'mdi:water-percent'
+                name: Garage
+                show:
+                  fill: false
+      - type: vertical-stack
+        cards:
+          - content: >
+              # <img width="30" height="30" src='/local/security.png'
+              style='vertical-align:middle' /> Security
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+            type: markdown
+          - type: glance
+            entities:
+              - entity: camera.kitchen_camera
+                name: Kitchen
+              - entity: camera.living_room_camera
+                name: Living Room
+              - entity: camera.office_camera
+                name: Office
+              - entity: camera.garage_camera
+                name: Garage
+            show_state: false
+          - entities:
+              - entity: input_select.chromecast_tv
+                icon: 'mdi:cast-connected'
+              - entity: input_select.camera_select
+                icon: 'mdi:cctv'
+              - action_name: Stream
+                entity: script.cameracast
+                icon: 'mdi:play'
+                name: Start Casting
+            title: false
+            type: entities
+          - content: >
+              # <img width="30" height="30" src='/local/security.png'
+              style='vertical-align:middle' /> Security Alerts
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+            type: markdown
+          - type: horizontal-stack
+            cards:
+              - entity: group.temp_alerts
+                icon: 'mdi:thermometer-alert'
+                name: Garage
+                state:
+                  - icon: 'mdi:thermometer-alert'
+                    name: Disabled
+                    styles:
+                      icon:
+                        - width: 55%
+                        - opacity: 0.2
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                    value: 'off'
+                  - color: black
+                    icon: 'mdi:thermometer-alert'
+                    operator: default
+                    name: Enabled
+                    styles:
+                      icon:
+                        - width: 55%
+                        - opacity: 0.9
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - font-weight: bold
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                type: 'custom:button-card'
+              - entity: group.humidity_alerts
+                icon: 'mdi:water-percent-alert'
+                name: Toilet
+                state:
+                  - icon: 'mdi:water-percent-alert'
+                    name: Disabled
+                    styles:
+                      icon:
+                        - width: 55%
+                        - opacity: 0.2
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                    value: 'off'
+                  - color: black
+                    icon: 'mdi:water-percent-alert'
+                    operator: default
+                    name: Enabled
+                    styles:
+                      card: null
+                      icon:
+                        - width: 55%
+                        - opacity: 0.9
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - font-weight: bold
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                type: 'custom:button-card'
+              - entity: group.security_alerts
+                icon: 'mdi:security'
+                name: Office
+                state:
+                  - icon: 'mdi:security'
+                    name: Disabled
+                    styles:
+                      icon:
+                        - width: 55%
+                        - opacity: 0.2
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                    value: 'off'
+                  - color: black
+                    icon: 'mdi:security'
+                    operator: default
+                    name: Enabled
+                    styles:
+                      icon:
+                        - width: 55%
+                        - opacity: 0.9
+                      name:
+                        - padding: 0px 10px 15px
+                        - font-size: 15px
+                        - font-weight: bold
+                        - text-overflow: unset
+                        - white-space: unset
+                        - word-break: break-word
+                type: 'custom:button-card'
+          - content: >
+              # <img width="30" height="30" src='/local/temp.png'
+              style='vertical-align:middle' /> Temperature
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent !important;
+                  box-shadow: none !important;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 25px;
+                   # font-weight: bold;
+                    text-align: center;
+                    letter-spacing: '-0.01em';
+                  }
+            type: markdown
+          - type: horizontal-stack
+            cards:
+              - type: 'custom:mini-graph-card'
+                align_icon: left
+                align_state: center
+                entities:
+                  - sensor.kitchen_temperature
+                font_size: 75
+                icon: 'mdi:thermometer'
+                name: Kitchen
+                show:
+                  fill: false
+              - type: 'custom:mini-graph-card'
+                align_icon: left
+                align_state: center
+                entities:
+                  - sensor.bathroom_temperature
+                font_size: 75
+                icon: 'mdi:thermometer'
+                name: Bathroom
+                show:
+                  fill: false
+              - type: 'custom:mini-graph-card'
+                align_icon: left
+                align_state: center
+                entities:
+                  - sensor.lumi_lumi_weather_temperature
+                font_size: 75
+                icon: 'mdi:thermometer'
+                name: Laundry
+                show:
+                  fill: false
+          - type: horizontal-stack
+            cards:
+              - type: 'custom:mini-graph-card'
+                align_icon: left
+                align_state: center
+                entities:
+                  - sensor.garage_lights_ds18b20_temperature
+                font_size: 75
+                icon: 'mdi:thermometer'
+                name: Lights
+                show:
+                  fill: false
+              - type: 'custom:mini-graph-card'
+                align_icon: left
+                align_state: center
+                entities:
+                  - sensor.3d_printer_si7021_temperature
+                font_size: 75
+                icon: 'mdi:thermometer'
+                name: 3D Printer
+                show:
+                  fill: false
+title: Home
