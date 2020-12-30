@@ -3,8 +3,8 @@
 Here are my settings for Home Assistant. The settings are always changing, but I hope it can help somebody that is looking for ideas or getting started. Feel free to fork this and play with. If you have any questions don't hesitate contacting me.
 
 ## Screenshots
-<img src="https://raw.githubusercontent.com/valgeirhelgi/home-assistant/main/home.png" alt="Home" width=428 height=262><img src="https://raw.githubusercontent.com/valgeirhelgi/home-assistant/main/media.png" alt="Media" width=428 height=262>
-<img src="https://raw.githubusercontent.com/valgeirhelgi/home-assistant/main/lights.png" alt="Lights" width=428 height=262><img src="https://raw.githubusercontent.com/valgeirhelgi/home-assistant/main/backend.png" alt="Backend" width=428 height=262>
+<img src="https://raw.githubusercontent.com/valgeirhelgi/home-assistant/main/home.png" alt="Home" width=214 height=131><img src="https://raw.githubusercontent.com/valgeirhelgi/home-assistant/main/media.png" alt="Media" width=214 height=131>
+<img src="https://raw.githubusercontent.com/valgeirhelgi/home-assistant/main/lights.png" alt="Lights" width=214 height=131><img src="https://raw.githubusercontent.com/valgeirhelgi/home-assistant/main/backend.png" alt="Backend" width=214 height=131>
 
 ## Hardware
 I'm using a mish mash of Xiaomi sensors, Philips hue, Sonoff Tasmota, Sonoff Camera and Onvif camera. Full list of hardware will be in the wiki.
