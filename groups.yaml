@@ -1,0 +1,60 @@
+camera_cast:
+ name: Camera Cast
+ entities:
+    - input_select.camera_select
+    - input_select.chromecast_tv
+    - script.cameracast  
+
+temp-alerts:
+ name: Temperature Alerts
+ entities:
+    - automation.bathroom_temp_1
+    - automation.bathroom_temp_2
+    - automation.kitchen_temp_1
+    - automation.kitchen_temp_2
+    - automation.garage_temp_1
+    - automation.garage_temp_2
+    - automation.garage_temp_3
+    - automation.garage_temp_4
+
+humidity-alerts:
+ name: Humidity Alerts
+ entities:
+    - automation.bathroom_humidity
+    - automation.kitchen_humidity
+    - automation.garage_humidity
+
+security-alerts:
+ name: Security Alerts
+ entities:
+    - automation.balcony_door_open
+    - automation.frontdoor_open
+    - automation.laundry_room_door_open
+    - automation.intruder_office
+    - automation.intruder_living_room
+    - automation.intruder_garage
+    - automation.intruder_bedroom
+    - automation.intruder_bathroom
+    - automation.intruder_hallway
+
+lights-automation:
+ name: Lights Automation
+ entities:
+    - automation.bathroom_lights
+    - automation.bedroom_lights
+    - automation.garage_lights_off
+    - automation.garage_lights
+    - automation.hallway_lights
+    - automation.living_room_and_kitchen_lights
+    - automation.office_lights
+
+security-alerts-frontpage:
+ name: Security Alerts Frontpage
+ entities:
+    - group.humidity_alerts
+    - group.security_alerts
+    - group.temp_alerts
+    - automation.dryer
+    - automation.washing_machine
+    - automation.laundry_room_humidity
+    - automation.laundry_room_temp
