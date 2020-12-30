@@ -1,0 +1,527 @@
+- id: '1608015427612'
+  alias: Bathroom lights
+  description: Motion detection lights in bathroom
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      motion_entity: binary_sensor.bathroom_motion
+      light_target:
+        area_id: bathroom
+      no_motion_wait: '600'
+- id: '1608953760211'
+  alias: Intruder - Bedroom
+  description: ''
+  use_blueprint:
+    path: StanG/notification-with-camera-snapshot-expanded-with-blocking-condition-and-clickaction.yaml
+    input:
+      delay: '0'
+      motion_sensor: binary_sensor.bedroom_motion
+      camera: camera.kitchen_camera
+      notify_device: 27503882d25051df46e111d7fa74e573
+      blocker_entity: person.xxx
+      notification_title: Hreyfing í svefniherbergi
+- id: '1608954298535'
+  alias: Intruder - Bathroom
+  description: ''
+  use_blueprint:
+    path: StanG/notification-with-camera-snapshot-expanded-with-blocking-condition-and-clickaction.yaml
+    input:
+      delay: '0'
+      motion_sensor: binary_sensor.bathroom_motion
+      camera: camera.kitchen_camera
+      notify_device: 27503882d25051df46e111d7fa74e573
+      blocker_entity: person.xxx
+- id: '1608955384716'
+  alias: Intruder - Hallway
+  description: ''
+  use_blueprint:
+    path: StanG/notification-with-camera-snapshot-expanded-with-blocking-condition-and-clickaction.yaml
+    input:
+      delay: '0'
+      motion_sensor: binary_sensor.hallway_motion
+      camera: camera.kitchen_camera
+      notify_device: 27503882d25051df46e111d7fa74e573
+      blocker_entity: person.xxx
+- id: '1608955673383'
+  alias: Intruder - Office
+  description: ''
+  use_blueprint:
+    path: StanG/notification-with-camera-snapshot-expanded-with-blocking-condition-and-clickaction.yaml
+    input:
+      delay: '0'
+      motion_sensor: binary_sensor.office_motion
+      camera: camera.office_camera
+      notify_device: 27503882d25051df46e111d7fa74e573
+      blocker_entity: person.xxx
+- id: '1608955719065'
+  alias: Intruder - Living Room
+  description: ''
+  use_blueprint:
+    path: StanG/notification-with-camera-snapshot-expanded-with-blocking-condition-and-clickaction.yaml
+    input:
+      delay: '0'
+      motion_sensor: binary_sensor.living_room_motion
+      camera: camera.living_room_camera
+      notify_device: 27503882d25051df46e111d7fa74e573
+      blocker_entity: person.xxx
+- id: '1608955751839'
+  alias: Intruder - Garage
+  description: ''
+  use_blueprint:
+    path: StanG/notification-with-camera-snapshot-expanded-with-blocking-condition-and-clickaction.yaml
+    input:
+      delay: '0'
+      motion_sensor: binary_sensor.garage_motion
+      camera: camera.garage_camera
+      notify_device: 27503882d25051df46e111d7fa74e573
+      blocker_entity: person.xxx
+- id: '1609000395777'
+  alias: Office - Lights
+  description: When movement detected turn on lights in the office.
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      no_motion_wait: '300'
+      motion_entity: binary_sensor.office_motion
+      light_target:
+        area_id: office
+- id: '1609000429262'
+  alias: Bedroom - Lights
+  description: When movement detected turn on lights in the bedroom.
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      no_motion_wait: '300'
+      motion_entity: binary_sensor.bedroom_motion
+      light_target:
+        device_id: 3be569568a7e5ca2009a5734c2357373
+- id: '1609000461844'
+  alias: Living Room and Kitchen - Lights
+  description: When movement detected turn on lights in the bedroom.
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      no_motion_wait: '300'
+      motion_entity: binary_sensor.living_room_motion
+      light_target:
+        area_id:
+        - kitchen
+        - living_room
+- id: '1609000489709'
+  alias: Hallway - Lights
+  description: When movement detected turn on lights in the bedroom.
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      no_motion_wait: '300'
+      motion_entity: binary_sensor.hallway_motion
+      light_target:
+        area_id: hallway
+- id: '1609000688070'
+  alias: Garage - Lights On
+  description: When movement is detected turn on lights in the garage.
+  trigger:
+  - type: motion
+    platform: device
+    device_id: b90c751b665c9f09f62f470d88880ee0
+    entity_id: binary_sensor.garage_motion
+    domain: binary_sensor
+  condition: []
+  action:
+  - type: turn_on
+    device_id: 445f0fc3a152c7078b8d1b58305eec55
+    entity_id: switch.tasmota
+    domain: switch
+  mode: single
+- id: '1609001155369'
+  alias: Garage - Lights Off
+  description: When no movement is detected turn off lights in the garage.
+  trigger:
+  - type: no_motion
+    platform: device
+    device_id: b90c751b665c9f09f62f470d88880ee0
+    entity_id: binary_sensor.garage_motion
+    domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  condition: []
+  action:
+  - type: turn_off
+    device_id: 445f0fc3a152c7078b8d1b58305eec55
+    entity_id: switch.tasmota
+    domain: switch
+  mode: single
+- id: '1609028120817'
+  alias: Laundry Room Door Open
+  description: When the laundry room door is open send notification if there is nobody
+    home.
+  trigger:
+  - type: opened
+    platform: device
+    device_id: 6e263e8d6fb86bc4289f7cbcaea13713
+    entity_id: binary_sensor.lumi_lumi_sensor_magnet_aq2_on_off
+    domain: binary_sensor
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: person.xxx
+      state: Away
+  action:
+  - device_id: 27503882d25051df46e111d7fa74e573
+    domain: mobile_app
+    type: notify
+    message: Hurðin að þvottahúsinu er opin og það er enginn heima.
+    title: Þvottahúshurð
+  mode: single
+- id: '1609028192830'
+  alias: Balcony Door Open
+  description: When the balcony door is open send notification if there is nobody
+    home.
+  trigger:
+  - type: opened
+    platform: device
+    device_id: bbe20516c7fa474f10ec2fa62aa4cd12
+    entity_id: binary_sensor.balconydoor_status
+    domain: binary_sensor
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: person.xxx
+      state: Away
+  action:
+  - device_id: 27503882d25051df46e111d7fa74e573
+    domain: mobile_app
+    type: notify
+    message: Svalarhurðinn er opin og það er enginn heima.
+    title: Svalarhurð
+  mode: single
+- id: '1609028260693'
+  alias: Frontdoor Open
+  description: When the frontdoor is open send notification if there is nobody home.
+  trigger:
+  - type: opened
+    platform: device
+    device_id: 99ddd86aa529cb74d2e67ee252ee18d9
+    entity_id: binary_sensor.frontdoor_status
+    domain: binary_sensor
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: person.xxx
+      state: Away
+  action:
+  - device_id: 27503882d25051df46e111d7fa74e573
+    domain: mobile_app
+    type: notify
+    message: Útidyr er opin og það er enginn heima.
+    title: Útidyr
+  mode: single
+- id: '1609029088198'
+  alias: Bathroom Temp 1
+  description: If the temp is above 25° then send notification.
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.bathroom_temperature
+    above: '25'
+  condition: []
+  action:
+  - device_id: 27503882d25051df46e111d7fa74e573
+    domain: mobile_app
+    type: notify
+    message: Hitastigið á baðherberginu er of hátt!
+    title: Hitastig á baði
+  mode: single
+- id: '1609029532114'
+  alias: Garage Temp 3
+  description: If the temp is below 10° then send notification.
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.garage_lights_ds18b20_temperature
+    below: '10'
+  condition: []
+  action:
+  - device_id: 27503882d25051df46e111d7fa74e573
+    domain: mobile_app
+    type: notify
+    message: Hitastigið í bílskúrnum er of lágt!
+    title: Hitastig í bílskúr
+  mode: single
+- id: '1609029600642'
+  alias: Garage Temp 4
+  description: If the temp is below 10° then send notification.
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.3d_printer_si7021_temperature
+    below: '10'
+  condition: []
+  action:
+  - device_id: 27503882d25051df46e111d7fa74e573
+    domain: mobile_app
+    type: notify
+    message: Hitastigið í bílskúrnum er of lágt!
+    title: Hitastig í bílskúr
+  mode: single
+- id: '1609029684472'
+  alias: Kitchen Temp 2
+  description: If the temp is below 10° then send notification.
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.bathroom_temperature
+    below: '10'
+  condition: []
+  action:
+  - device_id: 27503882d25051df46e111d7fa74e573
+    domain: mobile_app
+    type: notify
+    message: Hitastigið í eldhúsinu er of lágt!
+    title: Hitastig í eldhúsinu
+  mode: single
+- id: '1609029759106'
+  alias: Garage Temp 1
+  description: If the temp is above 25° then send notification.
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.3d_printer_si7021_temperature
+    above: '25'
+  condition: []
+  action:
+  - device_id: 27503882d25051df46e111d7fa74e573
+    domain: mobile_app
+    type: notify
+    message: Hitastigið í bílskúrnum er of hátt!
+    title: Hitastig í bílskúrnum
+  mode: single
+- id: '1609029784040'
+  alias: Garage Temp 2
+  description: If the temp is above 25° then send notification.
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.garage_lights_ds18b20_temperature
+    above: '25'
+  condition: []
+  action:
+  - device_id: 27503882d25051df46e111d7fa74e573
+    domain: mobile_app
+    type: notify
+    message: Hitastigið í bílskúrnum er of hátt!
+    title: Hitastig í bílskúrnum
+  mode: single
+- id: '1609029860456'
+  alias: Bathroom Temp 2
+  description: If the temp is below 10° then send notification.
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.bathroom_temperature
+    below: '10'
+  condition: []
+  action:
+  - device_id: 27503882d25051df46e111d7fa74e573
+    domain: mobile_app
+    type: notify
+    message: Hitastigið á baðherberginu er of lágt!
+    title: Hitastig á baði
+  mode: single
+- id: '1609029935255'
+  alias: Kitchen Temp 1
+  description: If the temp is above 25° then send notification.
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.bathroom_temperature
+    above: '25'
+  condition: []
+  action:
+  - device_id: 27503882d25051df46e111d7fa74e573
+    domain: mobile_app
+    type: notify
+    message: Hitastigið í eldhúsinu er of hátt!
+    title: Hitastig í eldhúsinu
+  mode: single
+- id: '1609030036347'
+  alias: Kitchen Humidity
+  description: If the humidity is above 40 then send notification.
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.kitchen_humidity
+    above: '40'
+  condition: []
+  action:
+  - device_id: 27503882d25051df46e111d7fa74e573
+    domain: mobile_app
+    type: notify
+    message: Rakastigið í eldhúsinu er of hátt!
+    title: Rakastig í eldhúsi
+  mode: single
+- id: '1609030107933'
+  alias: Garage Humidity
+  description: If the humidity is above 40 then send notification.
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.3d_printer_si7021_humidity
+    above: '40'
+  condition: []
+  action:
+  - device_id: 27503882d25051df46e111d7fa74e573
+    domain: mobile_app
+    type: notify
+    message: Rakastigið í bílskúrnum er of hátt!
+    title: Rakastig í bílskúr
+  mode: single
+- id: '1609033365649'
+  alias: Washing Machine
+  description: ''
+  use_blueprint:
+    path: Sbyx/notify-or-do-something-when-an-appliance-like-a-dishwasher-or-washing-machine-finishes.yaml
+    input:
+      finishing_hysteresis: '5'
+      power_sensor: sensor.tasmota_energy_apparentpower
+      actions:
+      - device_id: 27503882d25051df46e111d7fa74e573
+        domain: mobile_app
+        type: notify
+        message: Þvotturinn er orðinn hreinn, en það þarf að setja hann í þurrkarann.
+        title: Þvottavélin er búin.
+      - service: notify.living_room_tv
+        data:
+          message: Þvottavélin er búin, núna þarf að færa yfir í þurrkarann. :D
+      finishing_threshold: '5'
+      starting_hysteresis: '5'
+      starting_threshold: '5'
+- id: '1609033451878'
+  alias: Dryer
+  description: ''
+  use_blueprint:
+    path: Sbyx/notify-or-do-something-when-an-appliance-like-a-dishwasher-or-washing-machine-finishes.yaml
+    input:
+      finishing_hysteresis: '5'
+      power_sensor: sensor.tasmota_energy_apparentpower_2
+      actions:
+      - service: notify.living_room_tv
+        data:
+          message: Þurrkarinn er búinn. :D
+      - device_id: 27503882d25051df46e111d7fa74e573
+        domain: mobile_app
+        type: notify
+        message: Þvotturinn er orðinn þurr og fínn, núna þarf bara að ganga frá honum.
+        title: Þurrkarinn er búinn.
+      finishing_threshold: '5'
+      starting_hysteresis: '5'
+      starting_threshold: '5'
+- id: '1609039855345'
+  alias: Bathroom Humidity
+  description: If the humidity is above 40 then send notification.
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.bathroom_humidity
+    above: '45'
+  condition: []
+  action:
+  - device_id: 27503882d25051df46e111d7fa74e573
+    domain: mobile_app
+    type: notify
+    message: Rakastigið á baðherberginu er of hátt!
+    title: Rakastig á baðherberginu
+  mode: single
+- id: '1609127214643'
+  alias: Toggle Lamp A
+  description: Turns the lamp a on.
+  trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 7832ff6d507413bf74074f67f3aa1662
+    type: action
+    subtype: single
+    discovery_id: 0x00158d00054d93be action_single
+  - platform: device
+    domain: mqtt
+    device_id: 0ebd8069bc2448a160310ff1cdbac8fe
+    type: action
+    subtype: hold
+    discovery_id: 0x00158d0002c3a3f5 action_hold
+  condition: []
+  action:
+  - type: toggle
+    device_id: f673b0dabb4a605ea0d5f17138c59323
+    entity_id: light.lampi_a
+    domain: light
+  mode: single
+- id: '1609127352908'
+  alias: Toggle bedroom lights
+  description: Turns the lamp a on.
+  trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 7832ff6d507413bf74074f67f3aa1662
+    type: action
+    subtype: double
+    discovery_id: 0x00158d00054d93be action_double
+  - platform: device
+    domain: mqtt
+    device_id: 0ebd8069bc2448a160310ff1cdbac8fe
+    type: action
+    subtype: double
+    discovery_id: 0x00158d0002c3a3f5 action_double
+  condition: []
+  action:
+  - type: toggle
+    device_id: 3be569568a7e5ca2009a5734c2357373
+    entity_id: light.svefnherbergi
+    domain: light
+  mode: single
+- id: '1609127541818'
+  alias: Toggle Lamp B
+  description: Turns the lamp a on.
+  trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 0ebd8069bc2448a160310ff1cdbac8fe
+    type: action
+    subtype: single
+    discovery_id: 0x00158d0002c3a3f5 action_single
+  - platform: device
+    domain: mqtt
+    device_id: 7832ff6d507413bf74074f67f3aa1662
+    type: action
+    subtype: hold
+    discovery_id: 0x00158d00054d93be action_hold
+  condition: []
+  action:
+  - type: toggle
+    device_id: b780e687fe779a0785cd6416e62d2b0c
+    entity_id: light.lampi_b
+    domain: light
+  mode: single
+- id: '1609217364581'
+  alias: Laundry Room Temp
+  description: If the temp is above 25° then send notification.
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.lumi_lumi_weather_temperature
+    above: '35'
+  condition: []
+  action:
+  - device_id: 27503882d25051df46e111d7fa74e573
+    domain: mobile_app
+    type: notify
+    message: Hitastigið í þvottahúsinu er of hátt!
+    title: Hitastig í þvottahúsinu
+  mode: single
+- id: '1609217476690'
+  alias: Laundry Room Humidity
+  description: If the humidity is above 40 then send notification.
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.lumi_lumi_weather_humidity
+    above: '40'
+  condition: []
+  action:
+  - device_id: 27503882d25051df46e111d7fa74e573
+    domain: mobile_app
+    type: notify
+    message: Rakastigið í þvottahúsinu er of hátt!
+    title: Rakastig í þvottahúsi
+  mode: single
