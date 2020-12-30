@@ -1,0 +1,25 @@
+cameracast:
+  alias: Stream Cameras to Chromecast
+  sequence:
+  - service: camera.play_stream
+    data_template:
+      entity_id: '{% if is_state("input_select.camera_select", "Garage") %} camera.garage_camera
+        {% elif is_state("input_select.camera_select", "Livingroom") %} camera.living_room_camera
+        {% elif is_state("input_select.camera_select", "Kitchen") %} camera.kitchen_camera
+        {% elif is_state("input_select.camera_select", "Office") %} camera.office_camera
+        {% endif %}
+
+        '
+      media_player: '{% if is_state("input_select.chromecast_tv", "Television") %}
+        media_player.living_room_chromecast {% endif %}
+
+        '
+      format: hls
+officeleft:
+  alias: Move office camera to the left
+  sequence:
+  - service: sonoff.send_command
+    data:
+      device: Insert Device ID here
+      cmd: left
+  mode: single
