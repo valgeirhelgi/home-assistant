@@ -1,0 +1,179 @@
+# File to keep sensors seperated from main config file
+
+- platform: seventeentrack
+  username: !secret gmail
+  password: !secret 17track
+
+- platform: tautulli
+  api_key: !secret tautulli
+  host: Insert IP of host
+  port: Insert port
+
+- platform: cpuspeed
+
+- platform: couchpotato
+  name: Downloaded movies
+  token: !secret couchpotato
+  host: Insert IP of host
+  port: Insert port
+  protocol: 'http'
+  state: 'done'
+
+- platform: sonarr_upcoming_media
+  api_key: !secret sonarr
+  host: Insert IP of host
+  port: Insert port
+  days: 7
+  ssl: false
+  max: 10
+
+- platform: plex_recently_added
+  name: Recently Added Movies
+  token: !secret plex
+  host: Insert IP of host
+  port: Insert port
+  section_types:
+    - movie
+
+- platform: plex_recently_added
+  name: Recently Added TV
+  token: !secret plex
+  host: Insert IP of host
+  port: Insert port
+  section_types:
+    - show
+
+- platform: command_line
+  name: Transmission Online
+  command: response=$(curl -LIk -m 3 http://Insert IP of host:port -o /dev/null -w "%{http_code}\n" -s); test "$response" -ge 200 && echo "Online" || echo "Offline" 
+  scan_interval: 90
+  value_template: '{{ value }}' 
+
+- platform: command_line
+  name: Plex Online
+  command: response=$(curl -LIk -m 3 http://Insert IP of host:port -o /dev/null -w "%{http_code}\n" -s); test "$response" -ge 200 && echo "Online" || echo "Offline"
+  scan_interval: 90
+  value_template: '{{ value }}'
+
+- platform: command_line
+  name: Jackett Online
+  command: response=$(curl -LIk -m 3 http://Insert IP of host:port -o /dev/null -w "%{http_code}\n" -s); test "$response" -ge 200 && echo "Online" || echo "Offline"
+  scan_interval: 90
+  value_template: '{{ value }}'
+
+- platform: command_line
+  name: Sonarr Online
+  command: response=$(curl -LIk -m 3 http://Insert IP of host:port -o /dev/null -w "%{http_code}\n" -s); test "$response" -ge 200 && echo "Online" || echo "Offline"
+  scan_interval: 90
+  value_template: '{{ value }}'
+
+- platform: command_line
+  name: Couchpotato Online
+  command: response=$(curl -LIk -m 3 http://Insert IP of host:port -o /dev/null -w "%{http_code}\n" -s); test "$response" -ge 200 && echo "Online" || echo "Offline"
+  scan_interval: 90
+  value_template: '{{ value }}'
+
+- platform: command_line
+  name: Ombi Online
+  command: response=$(curl -LIk -m 3 http://Insert IP of host:port -o /dev/null -w "%{http_code}\n" -s); test "$response" -ge 200 && echo "Online" || echo "Offline"
+  scan_interval: 90
+  value_template: '{{ value }}'
+
+- platform: command_line
+  name: 'Zigbee Bridge Online'
+  command: response=$(curl -LIk -m 3 http://Insert IP of host:port -o /dev/null -w "%{http_code}\n" -s); test "$response" -ge 200 && echo "Online" || echo "Offline" 
+  scan_interval: 90
+  value_template: '{{ value }}' 
+
+- platform: command_line
+  name: 'RF Bridge Online'
+  command: response=$(curl -LIk -m 3 http://Insert IP of host:port -o /dev/null -w "%{http_code}\n" -s); test "$response" -ge 200 && echo "Online" || echo "Offline" 
+  scan_interval: 90
+  value_template: '{{ value }}'
+
+- platform: command_line
+  name: 'Router Online'
+  command: response=$(curl -LIk -m 3 http://Insert IP of host:port -o /dev/null -w "%{http_code}\n" -s); test "$response" -ge 200 && echo "Online" || echo "Offline" 
+  scan_interval: 90
+  value_template: '{{ value }}'
+
+- platform: command_line
+  name: 'Philips Hue Online'
+  command: response=$(curl -LIk -m 3 http://Insert IP of host:port -o /dev/null -w "%{http_code}\n" -s); test "$response" -ge 200 && echo "Online" || echo "Offline" 
+  scan_interval: 90
+  value_template: '{{ value }}'
+
+- platform: uptime
+  name: Hassio Uptime
+
+- platform: authenticated
+
+- platform: version
+  source: hassio
+
+- platform: systemmonitor
+  resources:
+      - type: disk_use_percent
+        arg: /home
+      - type: memory_use_percent
+      - type: memory_use
+      - type: swap_use
+      - type: swap_free
+      - type: swap_use_percent
+      - type: load_1m
+      - type: load_5m
+      - type: load_15m
+      - type: memory_free
+      - type: last_boot
+      - type: processor_use
+      - type: network_in
+        arg: eth0
+      - type: network_out
+        arg: eth0
+      - type: ipv4_address
+        arg: eth0
+      - type: throughput_network_in
+        arg: eth0
+      - type: throughput_network_out
+        arg: eth0
+
+- platform: template
+  sensors:
+  #----- Count Automations
+    count_automations:
+      value_template: "{{ states.automation | list | length }}"
+  #----- Count Scripts
+    count_scripts:
+      value_template: "{{ states.script| list | length }}"
+  #----- Count Device Trackers
+    count_device_trackers:
+      value_template: "{{ states.device_tracker | list | length }}"
+  #----- Count Binary Sensors
+    count_binary_sensors:
+      value_template: "{{ states.binary_sensor| list | length }}"
+  #----- Count Sensors
+    count_sensors:
+      value_template: "{{ states.sensor | list | length }}"
+  #----- Count Switches
+    count_switches:
+      value_template: "{{ states.switch | list | length }}"
+  #----- Count Zones
+    count_zones:
+      value_template: "{{ states.zone | list | length }}"
+  #----- Input Booleans
+    count_input_booleans:
+      value_template: "{{ states.input_boolean | list | length }}"
+  #----- Input Numbers
+    count_input_numbers:
+      value_template: "{{ states.input_number | list | length }}"
+  #----- Input Texts
+    count_input_texts:
+      value_template: "{{ states.input_text | list | length }}"
+  #----- Input Selects
+    count_input_selects:
+      value_template: "{{ states.input_select | list | length }}"
+  #----- Input Date Times
+    count_input_datetimes:
+      value_template: "{{ states.input_datetime | list | length }}"
+
+- platform: dnsip
